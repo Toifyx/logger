@@ -37,10 +37,18 @@ public class LoggerThroughputTest {
 
     private static AtomicInteger messageCount = new AtomicInteger(0);
 
+    private static String recordSize = record_100_byte;
+
     public static void main(String[] args) throws InterruptedException {
-        if (args.length >= 2) {
+        if (args.length >= 3) {
             count = Integer.parseInt(args[0]);
             threadNum = Integer.parseInt(args[1]);
+            int size = Integer.parseInt(args[2]);
+            switch (size){
+                case 200 : recordSize = record_200_byte; break;
+                case 400 : recordSize = record_400_byte; break;
+                default:;
+            }
         }
         final CountDownLatch latch = new CountDownLatch(threadNum);
         long st = System.currentTimeMillis();
@@ -50,7 +58,7 @@ public class LoggerThroughputTest {
                 public void run() {
                     while (messageCount.get() < count) {
                         messageCount.incrementAndGet();
-                        logger.info(record_100_byte);
+                        logger.info(recordSize);
                     }
                     latch.countDown();
                 }
