@@ -74,6 +74,7 @@ public class MobileAnalysis {
 
                             TreeNode newTree = new TreeNode();
                             newTree.setId(point);
+                            newTree.setName(line1);
                             nextRoot = newTree;
 
                             // add newTree to father
@@ -103,11 +104,9 @@ public class MobileAnalysis {
             } while (lines != null);
 
             //find mbile no by tree
-            String mobile = "13807871500";
-            findMobileCity(root, mobile);
+            findMobileCity(root, "13557514123");
+            findMobileCity(root, "13807871500");
             findMobileCity(root, "13975260095");
-            findMobileCity(root, "13557514123");
-            findMobileCity(root, "13557514123");
             findMobileCity(root, "15978253499");
             findMobileCity(root, "15978253500");
 
