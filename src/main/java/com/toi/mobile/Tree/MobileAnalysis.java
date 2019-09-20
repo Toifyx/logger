@@ -104,30 +104,38 @@ public class MobileAnalysis {
 
             //find mbile no by tree
             String mobile = "13807871500";
-            List<TreeNode> childrens = root.getChildren();
-            TreeNode nextNode;
-            for (int i = 0; i < mobile.length(); i++) {
-                char poin = mobile.charAt(i);
-                for (Iterator<TreeNode> it = childrens.iterator(); it.hasNext(); ) {
-                    TreeNode node = it.next();
-                    if (node.getId() == poin
-                            || (poin >= node.getStart() && poin <= node.getEnd())) {
-                        if(node.getChildren().size() != 0){
-                            // have next children continue
-                            nextNode = node;
-                            childrens = nextNode.getChildren();
-                            break;
-                        }else{
-                            //find
-                            System.out.println("mobile: "+ mobile +",city :"+ node.getName());
-                        }
-
-                    }
-                }
-            }
+            findMobileCity(root, mobile);
+            findMobileCity(root, "13975260095");
+            findMobileCity(root, "13557514123");
+            findMobileCity(root, "13557514123");
+            findMobileCity(root, "15978253499");
+            findMobileCity(root, "15978253500");
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void findMobileCity(TreeNode root, String mobile) {
+        List<TreeNode> childrens = root.getChildren();
+        TreeNode nextNode;
+        for (int i = 0; i < mobile.length(); i++) {
+            char poin = mobile.charAt(i);
+            for (TreeNode node : childrens) {
+                if (node.getId() == poin
+                        || (poin >= node.getStart() && poin <= node.getEnd())) {
+                    if (node.getChildren().size() != 0) {
+                        // have next children continue
+                        nextNode = node;
+                        childrens = nextNode.getChildren();
+                        break;
+                    } else {
+                        //find
+                        System.out.println("mobile: " + mobile + ",city :" + node.getName());
+                    }
+
+                }
+            }
         }
     }
 }
